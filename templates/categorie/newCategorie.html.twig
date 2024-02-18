@@ -1,0 +1,18 @@
+<p> Dump : {{ dump(categoriesData) }}</p>
+
+
+{{ form_start(form) }}
+    {{ form_row(form.titre) }}
+    {{ form_row(form.submit) }}
+{{ form_end(form) }}
+
+
+{# {% for category in var %}
+	<a href='{{path('category_detail', {id : category.id})}}'>See more details
+	</a>
+{% endfor %} #}
+
+
+<a href='{{path('app_accueil')}}' style="text-decoration:none;">
+	Accueil &emsp;
+</a>

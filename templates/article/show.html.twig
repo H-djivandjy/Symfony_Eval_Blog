@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article{% endblock %}
+
+{% block body %}
+    <h1>Article</h1>
+
+    <table class="table">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ article.id }}</td>
+        </tr>
+        <tr>
+            <th>Titre</th>
+            <td>{{ article.titre }}</td>
+        </tr>
+        <tr>
+            <th>Contenu</th>
+            <td>{{ article.contenu }}</td>
+        </tr>
+        <tr>
+            <th>DateCreation</th>
+            <td>{{ article.dateCreation ? article.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Status</th>
+            <td>{{ article.status ? 'Publié' : 'Brouillon' }}</td>
+        </tr>
+        <tr>
+            <th>DateParution</th>
+            <td>{{ article.dateParution ? article.dateParution|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+        <!-- Display comments -->
+        <tr>
+            <th>Comments</th>
+            <td>
+                <ul>
+                    {% for comment in comments %}
+                        <li>{{ comment.commentaire }} - {{ comment.datePublication|date('Y-m-d H:i:s') }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+    <a href="{{ path('app_article_index') }}">Retour à la list</a>
+
+    {# <a href="{{ path('app_article_show', {'id': article.id}) }}">edit</a> #}
+    <br>
+
+    {% if is_granted('ROLE_ADMIN') %}
+        <h1>Edit Article</h1>
+
+        {{ include('article/_form.html.twig', {'button_label': 'Update'}) }}
+
+        <br>
+
+        {{ include('article/_delete_form.html.twig') }}
+    {% endif %}
+
+{% endblock %}

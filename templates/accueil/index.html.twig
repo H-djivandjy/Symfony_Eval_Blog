@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Accueil
+{% endblock %}
+
+{% block body %}
+    <h1>Accueil</h1>
+    <br>
+
+    <a href="{{ path('app_categorie_index') }}" style="text-decoration:none;">Toutes les Categories &emsp;</a>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('app_categorie_new') }}" style="text-decoration:none;">Créer une Catégorie &emsp;</a>
+    {% endif %}
+
+    <a href='{{ path('app_articles') }}' style="text-decoration:none;">Tout les Articles &emsp; </a>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('app_article_new') }}" style="text-decoration:none;">Créer un Article &emsp;</a>
+    {% endif %}
+    <br>
+    <br>
+
+    <h2> Categories Récentes</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for category in categoriesData %}
+                <tr>
+                    <td>{{ category.id }}</td>
+                    <td>{{ category.titre }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
